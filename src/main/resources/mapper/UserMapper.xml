@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lios.study.app.mapper.UserMapper">
+    <resultMap id="user" type="com.lios.study.app.models.User"/>
+    <parameterMap id="user" type="com.lios.study.app.models.User"/>
+    <select id="findUserByName" parameterType="java.lang.String" resultMap="user">
+        SELECT * from user
+        WHERE NAME=#{1}
+    </select>
+    <select id="findUserById" parameterType="java.lang.Integer" resultMap="user">
+        SELECT * from user
+        WHERE id=#{1}
+    </select>
+    <update id="updateUserByName" parameterMap="user">
+        UPDATE USER SET PASSWORD=#{password}
+        WHERE NAME=#{name}
+    </update>
+    <delete id="deleteUserByName" parameterType="java.lang.String">
+        DELETE from USER
+        WHERE NAME=#{1}
+    </delete>
+    <insert id="saveUser" parameterType="user">
+        INSERT INTO USER (password, name, id )
+        VALUES (#{password}, #{name}, #{id})
+    </insert>
+    <select id="getUserList" resultMap="user">
+        SELECT * FROM USER
+    </select>
+</mapper>
